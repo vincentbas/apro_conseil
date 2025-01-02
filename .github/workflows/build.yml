@@ -5,32 +5,36 @@ on:
     branches: main
 
 jobs:
-  install:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
       - name: Use Pnpm as package manager
         uses: pnpm/action-setup@v4.0.0
         with:
           version: '9.x'
+
       - name: Use Node.js
         uses: actions/setup-node@v4.1.0
         with:
           node-version: "22.11.x"
           cache: 'pnpm'
           cache-dependency-path: pnpm-lock.yaml
-          registry-url: "https://npm.pkg.github.com"
+
       - name: Install dependencies and build
         run: pnpm install && pnpm build
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+
       - name: Deploy to S3
-        uses: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME }} --delete
-      - name: Invalidate Cloudfront
-        uses: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+        run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME }} --delete
+
+      - name: Invalidate CloudFront
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
