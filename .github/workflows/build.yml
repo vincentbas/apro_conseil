@@ -2,7 +2,7 @@ name: Build Frontend
 
 on:
   push:
-    branches: master
+    branches: main
   pull_request: 
     types: [opened, synchronise, reopened, ready_for_review]
 
