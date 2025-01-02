@@ -5,6 +5,18 @@ description: |
   Distribute static files by uploading them on S3
   Then if a CloudFront distribution is provided, create an invalidation
 
+on:
+  push:
+    branches:
+      - main  # Adjust based on your branch
+
+jobs:
+  distribute-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
 # inputs:
 #   path:
 #     description: Path of files to be uploaded to S3
