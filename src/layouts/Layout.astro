@@ -1,3 +1,7 @@
+---
+import GoogleAnalyticsSnippet from "../components/GoogleAnalyticsSnippet.astro"
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,19 +9,7 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<!-- Google tag (gtag.js) -->
-		<script 
-			type="text/partytown"
-			async 
-			src="https://www.googletagmanager.com/gtag/js?id=G-YL5PEC8TMS"
-		></script>
-		<script type="text/partytown">
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag("js", new Date());
-
-			gtag("config", "G-YL5PEC8TMS");
-		</script>
+		<GoogleAnalyticsSnippet />
 		<title>Astro Basics</title>
 	</head>
 	<body>
