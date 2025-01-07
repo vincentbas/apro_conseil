@@ -1,27 +1,29 @@
 ---
-import GoogleAnalyticsSnippet from "../components/GoogleAnalyticsSnippet.astro"
+// Components IMPORT 
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+
+// Layout IMPORT
+import Head from "./Head.astro";
+
+// Styles IMPORT
+import "../styles/reset.css";
+import "../styles/global.css";
+
+const {
+  title = "My Astro Blog",
+  description = "My musings about the Astro framework",
+  image,
+  frontmatter,
+  robots,
+} = Astro.props;
 ---
 
-<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<GoogleAnalyticsSnippet />
-		<title>Astro Basics</title>
-	</head>
+	<Head {title} {description} {image} {frontmatter} {robots} />
 	<body>
-		<slot />
+		<Navbar />
+		<slot> Default Text</slot>
+		<Footer />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

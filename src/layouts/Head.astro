@@ -1,0 +1,19 @@
+---
+// Components IMPORT
+import Seo from "../components/Seo.astro";
+import GoogleAnalyticsSnippet from "../components/GoogleAnalyticsSnippet.astro"
+
+// Code
+const { title, description, image, frontmatter, robots } = Astro.props;
+---
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <Seo {title} {description} url={Astro.url} {image} {frontmatter} {robots} />
+    <GoogleAnalyticsSnippet />
+</head>
