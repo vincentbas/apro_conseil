@@ -1,9 +1,10 @@
 ---
 // Components IMPORT
+import Seo from "../components/Seo.astro";
 import GoogleAnalyticsSnippet from "../components/GoogleAnalyticsSnippet.astro"
 
 // Code
-const { title, description } = Astro.props;
+const { title, description, image, frontmatter, robots } = Astro.props;
 ---
 
 <head>
@@ -13,5 +14,6 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <Seo {title} {description} url={Astro.url} {image} {frontmatter} {robots} />
     <GoogleAnalyticsSnippet />
 </head>
