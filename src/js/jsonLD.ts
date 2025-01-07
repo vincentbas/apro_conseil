@@ -1,4 +1,4 @@
-import siteData from "../data/siteData.json"
+import siteData from "../data/sitedata.json"
 // import { slugify } from "./utils";
 
 
